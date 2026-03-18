@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tất Cả Sản Phẩm - STUPID DOG 90S</title>
+    <link rel="stylesheet" href="../Asset/Css/style.css">
+    <link rel="stylesheet" href="../Asset/Css/modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <main class="container">
+        <div class="product-page-header">
+            <h1 class="page-title">Tất Cả Sản Phẩm</h1>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="filter-group">
+                <label for="categoryFilter">Danh Mục</label>
+                <select id="categoryFilter" onchange="changeCategory(this.value)">
+                    <option value="all">Tất Cả</option>
+                    <option value="ao-nam">Áo Nam</option>
+                    <option value="quan-au">Quần Nam</option>
+                    <option value="phu-kien">Phụ Kiện</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="sortBy">Sắp Xếp</label>
+                <select id="sortBy">
+                    <option value="newest">Mới Nhất</option>
+                    <option value="price-low">Giá: Thấp - Cao</option>
+                    <option value="price-high">Giá: Cao - Thấp</option>
+                    <option value="name">Tên A-Z</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="priceRange">Giá Tối Đa</label>
+                <div class="price-display">
+                    <input type="range" id="priceRange" min="0" max="1500000" value="1500000" step="50000">
+                    <span id="priceValue">1.500.000</span>
+                    <span>đ</span>
+                </div>
+            </div>
+
+            <div class="product-count">
+                <p>Hiển thị <span id="productCount">0</span> sản phẩm</p>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <section class="product-grid" id="productGrid">
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Website Thời Trang Online - [STUPID DOG 90S]</p>
+    </footer>
+
+    <script src="../Asset/js/main.js"></script>
+    <script src="../Asset/js/modal.js"></script>
+    <script src="../Asset/js/auth.js"></script>
+    <script src="../Asset/js/products.js"></script>
+    <script src="../Asset/js/search.js"></script>
+    <script>
+        let currentCategory = 'all';
+        
+        function changeCategory(category) {
+            currentCategory = category;
+            renderAllProducts();
+        }
+
+        function renderAllProducts(sortBy = 'newest', priceMin = 0, priceMax = Infinity) {
+            const container = document.getElementById('productGrid');
+            const sortSelect = document.getElementById('sortBy');
+            const priceRange = document.getElementById('priceRange');
+            
+            let allProducts = [];
+            
+            // Lấy tất cả sản phẩm hoặc từ category đã chọn
+            if(currentCategory === 'all') {
+                Object.keys(productsData).forEach(cat => {
+                    allProducts = allProducts.concat(productsData[cat]);
+                });
+            } else {
+                allProducts = productsData[currentCategory] || [];
+            }
+            
+            // Lọc theo giá
+            let filtered = allProducts.filter(p => p.price >= priceMin && p.price <= priceMax);
+            
+            // Sắp xếp
+            switch(sortBy || (sortSelect ? sortSelect.value : 'newest')) {
+                case 'price-low':
+                    filtered.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filtered.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name':
+                    filtered.sort((a, b) => a.name.localeCompare(b.name, 'vi'));
+                    break;
+                case 'newest':
+                default:
+                    filtered.sort((a, b) => b.id - a.id);
+            }
+            
+            // Render HTML
+            let html = '';
+            filtered.forEach(product => {
+                const badgeHtml = product.badge ? `<span class="badge">${product.badge}</span>` : '';
+                html += `
+                    <div class="product-card">
+                        <div class="product-thumb">
+                            ${badgeHtml}
+                            <img src="${product.img}" alt="${product.name}" class="img-main">
+                            <img src="${product.back}" alt="Back" class="img-hover">
+                            <button class="add-to-cart-btn" onclick="addToCart('${product.name}', ${product.price}, '${product.img}')">
+                                THÊM VÀO GIỎ
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <p class="brand">STUPID DOG 90S</p>
+                            <h3 class="name">${product.name}</h3>
+                            <p class="product-price" data-vnd="${product.price}">${product.price.toLocaleString('vi-VN')}đ</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html || '<p style="text-align: center;">Không có sản phẩm nào</p>';
+            document.getElementById('productCount').textContent = filtered.length;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderAllProducts();
+            
+            const sortSelect = document.getElementById('sortBy');
+            const priceRange = document.getElementById('priceRange');
+            
+            if(sortSelect) {
+                sortSelect.addEventListener('change', function() {
+                    const priceMax = priceRange ? parseInt(priceRange.value) : Infinity;
+                    renderAllProducts(this.value, 0, priceMax);
+                });
+            }
+            
+            if(priceRange) {
+                priceRange.addEventListener('input', function() {
+                    document.getElementById('priceValue').textContent = parseInt(this.value).toLocaleString('vi-VN');
+                    const sortBy = sortSelect ? sortSelect.value : 'newest';
+                    renderAllProducts(sortBy, 0, parseInt(this.value));
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ Sưu Tập | STUPID DOG</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Asset/Css/style.css">
+    <link rel="stylesheet" href="../Asset/Css/modal.css">
+</head>
+<body>
+    <!-- Menu Template -->
+    <div id="menu-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">BỘ SƯU TẬP</h1>
+            <p class="hero-subtitle">Những sản phẩm được chọn riêng cho bạn</p>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filter-group">
+                <label for="collectionSort">Sắp xếp:</label>
+                <select id="collectionSort" onchange="sortCollectionProducts()">
+                    <option value="featured">Nổi bật nhất</option>
+                    <option value="price-low">Giá thấp đến cao</option>
+                    <option value="price-high">Giá cao đến thấp</option>
+                    <option value="newest">Mới nhất</option>
+                </select>
+            </div>
+            <div class="product-count">
+                Hiển thị <span id="collectionCount">0</span> sản phẩm
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <div class="container">
+            <div id="collectionProducts" class="products-grid"></div>
+        </div>
+    </section>
+
+    <!-- Modal Template -->
+    <div id="modal-container"></div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../Asset/js/products.js"></script>
+    <script src="../Asset/js/main.js"></script>
+    <script src="../Asset/js/modal.js"></script>
+    <script src="../Asset/js/auth.js"></script>
+    <script src="../Asset/js/search.js"></script>
+
+    <script>
+        // Load Menu and Footer
+        fetch('../Pages/menu-template.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+                loadMenuScripts();
+            });
+
+        fetch('../Pages/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+
+        fetch('../Pages/modal-template.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('modal-container').innerHTML = data;
+                initModalLogic();
+            });
+
+        // Collection data - curated selection of products
+        const collectionProducts = [
+            ...productsData['ao-nam'].slice(0, 2),
+            ...productsData['quan-au'].slice(0, 2),
+            ...productsData['phu-kien'].slice(0, 2),
+            productsData['ao-nam'][2],
+            productsData['quan-au'][2],
+            productsData['phu-kien'][2]
+        ];
+
+        // Render collection products
+        function renderCollectionProducts(sortBy = 'featured') {
+            const container = document.getElementById('collectionProducts');
+            let sorted = [...collectionProducts];
+
+            // Sorting logic
+            if (sortBy === 'price-low') {
+                sorted.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'price-high') {
+                sorted.sort((a, b) => b.price - a.price);
+            } else if (sortBy === 'newest') {
+                sorted.reverse();
+            }
+
+            container.innerHTML = sorted.map(product => {
+                const currency = (localStorage.getItem('userPreferences') ? 
+                    JSON.parse(localStorage.getItem('userPreferences')).currency : 'VND');
+                let displayPrice = product.price;
+                let symbol = 'đ';
+
+                if (currency === 'USD') {
+                    displayPrice = Math.floor(product.price / 24000);
+                    symbol = '$';
+                } else if (currency === 'JPY') {
+                    displayPrice = Math.floor(product.price / 160);
+                    symbol = '¥';
+                } else if (currency === 'KRW') {
+                    displayPrice = Math.floor(product.price / 18);
+                    symbol = '₩';
+                }
+
+                return `
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="../${product.img}" alt="${product.name}" class="product-image">
+                            <img src="../${product.back}" alt="${product.name}-back" class="product-image-back">
+                            ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name}</h3>
+                            <div class="product-size">
+                                ${product.size.map(s => `<span>${s}</span>`).join('')}
+                            </div>
+                            <p class="product-price"><span class="price-value">${displayPrice.toLocaleString('vi-VN')}</span> <span class="price-symbol">${symbol}</span></p>
+                            <button class="add-to-cart-btn" onclick="addToCart('${product.name}', ${product.price}, '../${product.img}')">
+                                <i class="fas fa-shopping-bag"></i> Thêm vào giỏ
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Update product count
+            document.getElementById('collectionCount').innerText = sorted.length;
+        }
+
+        // Sort collection products
+        function sortCollectionProducts() {
+            const sortValue = document.getElementById('collectionSort').value;
+            renderCollectionProducts(sortValue);
+        }
+
+        // Initial render
+        renderCollectionProducts();
+    </script>
+</body>
+</html>

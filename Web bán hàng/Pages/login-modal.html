@@ -1,0 +1,48 @@
+<!-- Login Modal -->
+<div id="loginModal" class="login-modal">
+    <div class="login-modal-content">
+        <button class="login-modal-close" onclick="closeLoginModal()">✕</button>
+        
+        <div class="login-container">
+            <!-- Existing Account Section -->
+            <div class="login-section">
+                <h2>Thông tin xác nhận</h2>
+                <p class="section-subtitle">Tôi đã có tài khoản</p>
+                
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Đăng nhập*</label>
+                        <input type="email" id="loginEmail" placeholder="Email hoặc số điện thoại" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Mật khẩu*</label>
+                        <input type="password" id="loginPassword" placeholder="Mật khẩu" required>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">Đăng nhập</button>
+                </form>
+                
+                <p class="forgot-password"><a href="#">Bạn quên mật khẩu?</a></p>
+            </div>
+            
+            <!-- New Account Section -->
+            <div class="login-divider"></div>
+            
+            <div class="register-section">
+                <p class="section-subtitle">Thông tin bắt buộc*</p>
+                <p>Hoặc <a href="/Pages/dang-ky.html" class="register-link">tạo tài khoản mới</a></p>
+                
+                <div class="benefits">
+                    <p>Lợi ích khi tạo tài khoản:</p>
+                    <ul>
+                        <li>Thanh toán nhanh hơn</li>
+                        <li>Theo dõi đơn hàng</li>
+                        <li>Lưu địa chỉ giao hàng</li>
+                        <li>Nhận ưu đãi đặc biệt</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
