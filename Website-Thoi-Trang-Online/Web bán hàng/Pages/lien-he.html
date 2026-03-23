@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - STUPID DOG 90S</title>
+    <link rel="stylesheet" href="../Asset/Css/style.css">
+    <link rel="stylesheet" href="../Asset/Css/modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .contact-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 40px;
+            background: #fafafa;
+            border-radius: 10px;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .contact-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .contact-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .contact-info h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .contact-info-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-info-item i {
+            color: #8b0000;
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        .contact-info-item div {
+            flex: 1;
+        }
+
+        .contact-info-item strong {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .contact-info-item p {
+            color: #666;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .contact-form h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8b0000;
+        }
+
+        .contact-form button {
+            background: #8b0000;
+            color: white;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .contact-form button:hover {
+            background: #6b0000;
+        }
+
+        @media (max-width: 768px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Container -->
+    <div id="menu-container"></div>
+
+    <main class="contact-container">
+        <div class="contact-header">
+            <h1>Liên Hệ Với Chúng Tôi</h1>
+            <p>Chúng tôi luôn sẵn lòng lắng nghe ý kiến và thắc mắc của bạn</p>
+        </div>
+
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Thông Tin Liên Hệ</h3>
+                
+                <div class="contact-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Địa Chỉ</strong>
+                        <p>123 Đường Thời Trang, Quận 1, TP. Hồ Chí Minh</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong>Điện Thoại</strong>
+                        <p><a href="tel:0123456789" style="color: inherit; text-decoration: none;">0123 456 789</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong>
+                        <p><a href="mailto:info@stupiddog90s.com" style="color: inherit; text-decoration: none;">info@stupiddog90s.com</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>Giờ Hoạt Động</strong>
+                        <p>
+                            Thứ Hai - Chủ Nhật: 08:00 - 22:00<br>
+                            Ngày lễ: 10:00 - 20:00
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>Gửi Tin Nhắn</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Họ và Tên *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Chủ Đề *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Tin Nhắn *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit">Gửi Tin Nhắn</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
+    <div id="login-modal-container"></div>
+
+    <script src="../Asset/js/main.js"></script>
+    <script src="../Asset/js/modal.js"></script>
+    <script src="../Asset/js/auth.js"></script>
+    <script src="../Asset/js/search.js"></script>
+    <script>
+        // Load Menu
+        fetch('menu-template.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+                loadMenuScripts();
+            });
+
+        // Load Modal
+        fetch('modal-template.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('modal-container').innerHTML = data;
+                initModalLogic();
+            });
+
+        fetch('login-modal.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('login-modal-container').innerHTML = data;
+            });
+
+        // Load Footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
