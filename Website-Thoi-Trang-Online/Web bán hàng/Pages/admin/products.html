@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin - Products</title>
+  <link rel="stylesheet" href="../../Asset/Css/style.css">
+</head>
+<body class="admin">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <h2>Admin</h2>
+      <nav>
+        <a href="index.html">Tổng quan</a>
+        <a href="orders.html">Đơn hàng</a>
+        <a href="notifications.html">Thông báo</a>
+        <a href="products.html" class="active">Sản phẩm</a>
+        <a href="discounts.html">Giảm giá</a>
+        <a href="users.html">Người dùng</a>
+        <hr style="border-color:#444">
+        <a href="../index.html">Mở trang người dùng</a>
+        <a href="#" id="admin-logout">Đăng xuất</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header"><h1>Quản lý sản phẩm</h1></div>
+      <section id="productManagerContent">
+        <div style="display:flex;gap:20px;align-items:flex-start;">
+          <div style="flex:0 0 380px; background:#fff; padding:18px; border-radius:6px; box-shadow:0 1px 3px rgba(0,0,0,0.05)">
+            <h3>Thêm / Sửa sản phẩm</h3>
+            <form id="productForm">
+              <input type="hidden" id="productId">
+              <div style="margin-bottom:8px"><label>Tên sản phẩm</label><input id="productName" class="input" style="width:100%" required></div>
+              <div style="margin-bottom:8px"><label>Giá (VND)</label><input id="productPrice" type="number" class="input" style="width:100%" required></div>
+              <div style="margin-bottom:8px"><label>Ảnh chính (đường dẫn)</label><input id="productImg" class="input" style="width:100%"></div>
+              <div style="margin-bottom:8px"><label>Ảnh sau (back)</label><input id="productBack" class="input" style="width:100%"></div>
+              <div style="margin-bottom:8px"><label>Thể loại (category slug)</label><input id="productCategory" class="input" style="width:100%"></div>
+              <div style="margin-bottom:8px"><label>Badge</label><input id="productBadge" class="input" style="width:100%"></div>
+              <div style="display:flex;gap:8px;margin-top:12px">
+                <button type="submit" class="btn">Lưu</button>
+                <button type="button" id="cancelProductBtn" class="btn btn-muted">Hủy</button>
+                <button type="button" id="exportProductsBtn" class="btn btn-muted">Tải JSON</button>
+              </div>
+            </form>
+          </div>
+
+          <div style="flex:1; background:#fff; padding:18px; border-radius:6px; box-shadow:0 1px 3px rgba(0,0,0,0.05)">
+            <h3>Danh sách sản phẩm</h3>
+            <div style="margin-bottom:12px"><button id="refreshProductsBtn" class="btn">Tải lại sản phẩm</button></div>
+            <div id="productsList"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../../Asset/js/auth.js"></script>
+  <script src="../../Asset/js/admin.js"></script>
+  <script>
+    if (requireAdminPage && requireAdminPage()) {
+      initProductManager();
+      document.getElementById('admin-logout').addEventListener('click', function(e){ e.preventDefault(); handleLogout(); window.location.href='../../index.html'; });
+    }
+  </script>
+</body>
+</html>
