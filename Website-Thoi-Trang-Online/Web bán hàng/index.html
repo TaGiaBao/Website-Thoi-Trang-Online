@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUPID DOG 90S - Trang Chủ</title>
+    <link rel="stylesheet" href="Asset/Css/style.css">
+    <link rel="stylesheet" href="Asset/Css/modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Menu Container -->
+    <div id="menu-container"></div>
+
+    <main>
+        <section class="hero-section" style="background: url('Asset/img/background/hero-bg.png') center/cover;">
+            <div class="container">
+                <h1>STUPID DOG 90S</h1>
+                <p>New Collection 2026</p>
+                <a href="Pages/san-pham.html" class="btn-shop">XEM NGAY</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+    
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
+    <div id="login-modal-container"></div>
+
+    <script src="Asset/js/main.js"></script>
+    <script src="Asset/js/modal.js"></script>
+    <script src="Asset/js/auth.js"></script>
+    <script src="Asset/js/search.js"></script>
+
+    <script>
+        // Load Menu
+        fetch('Pages/menu-template.html')
+            .then(res => res.text())
+            .then(data => {
+                // Adjust paths for root location
+                data = data.replace(/href="\.\.\//g, 'href="');
+                data = data.replace(/href="bo-suu-tap\.html"/g, 'href="Pages/bo-suu-tap.html"');
+                data = data.replace(/href="giam-gia\.html"/g, 'href="Pages/giam-gia.html"');
+                data = data.replace(/href="lien-he\.html"/g, 'href="Pages/lien-he.html"');
+                data = data.replace(/href="ao-nam\.html"/g, 'href="Pages/ao-nam.html"');
+                data = data.replace(/href="quan-nam\.html"/g, 'href="Pages/quan-nam.html"');
+                data = data.replace(/href="phu-kien\.html"/g, 'href="Pages/phu-kien.html"');
+                data = data.replace(/href="gio-hang\.html"/g, 'href="Pages/gio-hang.html"');
+                data = data.replace(/src="\.\.\/Asset\//g, 'src="Asset/');
+                document.getElementById('menu-container').innerHTML = data;
+            });
+
+        // Load Footer
+        fetch('Pages/footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+
+        // Load Modal
+        fetch('Pages/modal-template.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('modal-container').innerHTML = data;
+                initModalLogic();
+            });
+
+        // Load Login Modal
+        fetch('Pages/login-modal.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('login-modal-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
