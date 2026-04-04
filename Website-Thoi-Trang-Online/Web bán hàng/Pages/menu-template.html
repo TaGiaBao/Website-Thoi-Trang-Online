@@ -1,0 +1,91 @@
+<div id="announcementBar" class="announcement-bar">
+    <p>Miễn phí vận chuyển cho thành viên <a href="#" onclick="openLoginModal(); return false;" style="color: inherit; text-decoration: underline;">ĐĂNG NHẬP HOẶC ĐĂNG KÝ</a></p>
+</div>
+
+<header class="main-header">
+    <div class="container header-grid">
+        <div class="search-bar">
+            <button class="icon-btn" type="button" onclick="performHeaderSearch()"><i class="fas fa-search"></i></button>
+            <input type="text" placeholder="Tìm kiếm sản phẩm..." onkeypress="if(event.key === 'Enter') performHeaderSearch()">
+        </div>
+
+        <div class="logo">
+            <a href="../index.html">
+                <img src="../Asset/img/logo/logo.png" alt="STUPID DOG 90S">
+            </a>
+        </div>
+
+        <div class="user-actions">
+            <a href="#" class="icon-btn" onclick="openPreferencesModal(); return false;" title="Thay đổi quốc gia & tiền tệ"><i class="fas fa-globe"></i></a>
+            <a href="#" class="icon-btn" onclick="openLoginModal(); return false;" title="Đăng nhập / Đăng kí"><i class="far fa-user"></i></a>
+            <a href="#" class="icon-btn"><i class="far fa-heart"></i></a>
+            <a href="gio-hang.html" class="cart-icon icon-btn">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </div>
+</header>
+
+<nav class="main-nav">
+    <div class="container">
+        <ul class="nav-links">
+            <li><a href="../index.html">TRANG CHỦ</a></li>
+            <li id="adminMenuItem" style="display:none"><a id="adminLink" href="Pages/admin/index.html">ADMIN</a></li>
+            
+            <li class="has-mega">
+                <a href="#" onclick="return false;" style="cursor: default;">
+                    SẢN PHẨM <i class="fas fa-chevron-down"></i>
+                </a>
+                
+                <div class="mega-menu">
+                    <div class="mega-container">
+                        <div class="mega-col">
+                            <h4>ÁO NAM</h4>
+                            <ul>
+                                <li><a href="ao-nam.html">Tất Cả Áo Nam</a></li>
+                                <li><a href="ao-nam.html">Áo Thun Graphic</a></li>
+                                <li><a href="ao-nam.html">Áo Polo Basic</a></li>
+                                <li><a href="ao-nam.html">Sơ Mi Oversize</a></li>
+                                <li><a href="ao-nam.html">Hoodie & Sweaters</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="mega-col">
+                            <h4>QUẦN NAM</h4>
+                            <ul>
+                                <li><a href="quan-nam.html">Tất Cả Quần Nam</a></li>
+                                <li><a href="quan-nam.html">Quần Âu Aristino</a></li>
+                                <li><a href="quan-nam.html">Quần Jeans Skinny</a></li>
+                                <li><a href="quan-nam.html">Quần Short Kaki</a></li>
+                                <li><a href="quan-nam.html">Quần Jogger Streetwear</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="mega-col">
+                            <h4>PHỤ KIỆN</h4>
+                            <ul>
+                                <li><a href="phu-kien.html">Tất Cả Phụ Kiện</a></li>
+                                <li><a href="phu-kien.html">Thắt Lưng Da</a></li>
+                                <li><a href="phu-kien.html">Ví & Túi Xách</a></li>
+                                <li><a href="phu-kien.html">Mũ Lưỡi Trai</a></li>
+                                <li><a href="phu-kien.html">Tất & Sneaker</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="mega-col mega-img">
+                            <div class="promo-box">
+                                <img src="../Asset/img/product/product-6-2.png" alt="New Arrival">
+                                <p>STUPID DOG 90S - LOOKBOOK 2026</p>
+                                <a href="bo-suu-tap.html" class="btn-link">XEM BỘ SƯU TẬP</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><a href="bo-suu-tap.html">BỘ SƯU TẬP</a></li>
+            <li><a href="giam-gia.html" style="color: #8b0000;">GIẢM GIÁ %</a></li>
+            <li><a href="lien-he.html">LIÊN HỆ</a></li>
+        </ul>
+    </div>
+</nav>
