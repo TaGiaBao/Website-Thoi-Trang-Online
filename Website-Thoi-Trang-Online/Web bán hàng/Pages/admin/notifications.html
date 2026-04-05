@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin - Notifications</title>
+  <link rel="stylesheet" href="../../Asset/Css/style.css">
+</head>
+<body class="admin">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <h2>Admin</h2>
+      <nav>
+        <a href="index.html">Tổng quan</a>
+        <a href="orders.html">Đơn hàng</a>
+        <a href="products.html">Sản phẩm</a>
+        <a href="notifications.html" class="active">Thông báo</a>
+        <a href="discounts.html">Giảm giá</a>
+        <a href="users.html">Người dùng</a>
+        <hr style="border-color:#444">
+        <a href="../../index.html">Mở trang người dùng</a>
+        <a href="#" id="admin-logout">Đăng xuất</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header"><h1>Thông báo</h1></div>
+      <section id="notificationsContent">
+      </section>
+    </main>
+  </div>
+
+  <script src="../../Asset/js/auth.js"></script>
+  <script src="../../Asset/js/admin.js"></script>
+  <script>
+    if (requireAdminPage && requireAdminPage()) {
+      loadNotifications();
+      document.getElementById('admin-logout').addEventListener('click', function(e){ e.preventDefault(); handleLogout(); window.location.href='../../index.html'; });
+    }
+  </script>
+</body>
+</html>
